@@ -2,9 +2,9 @@
 #include <stdarg.h>
 #include "shell.h"
 
-int main()
+int main(int ac, char *av[])
 {
-	_prompt();
+	_prompt(av);
 
 	return 0;
 }

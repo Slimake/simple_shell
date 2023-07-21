@@ -10,9 +10,12 @@ extern char **environ;
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
+
+
 
 /*Prototypes*/
-void _prompt();
+void _prompt(char *argv[]);
 
 
 #endif /*SHELL_H*/
