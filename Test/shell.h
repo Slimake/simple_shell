@@ -8,6 +8,8 @@ extern char **environ;
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 /*Prototypes*/
 void _prompt();

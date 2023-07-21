@@ -4,12 +4,7 @@
 
 int main()
 {
-
-	
-
 	_prompt();
-
-
 
 	return 0;
 }
