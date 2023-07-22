@@ -3,33 +3,56 @@
 
 void _prompt(char *argv[])
 {
-	pid_t pid;
-	size_t n = 0;
 	char *lineptr = NULL;
+	size_t n = 0;/*bufsize*/
+	pid_t pid;
 	ssize_t cmd;
 	char *prompt = "$ ";
 	char *token;
-	char *av[] = {NULL, NULL};
+	char **av;
 	struct stat statbuff;
 	char *env[] = {NULL};
+	int i = 0;/*index*/
 
 	while (1) 
 	{	
 		write(STDOUT_FILENO, prompt, 2);
 		cmd = getline(&lineptr, &n, stdin);
+		
+
 		if (cmd == -1)
 		{
 			perror("Error");
 			exit(0);
 		}
-	
-	
-		token = strtok(lineptr, " \t\r\a\n");
 		
-	//	if ( == 2)
+		av = (char**)malloc(CMDARGS_MAX * sizeof(char*));
 		
+		if (!av)
+		{
+			perror("Memeory alllocation error");
+			exit(1);
+		}
+
+
+
+
+/* Tokenize lineptr using spaces, tabs and newline */
+		token = strtok(lineptr, " \t\n");
+		
+		while (token != NULL)
+		{
+			av[i] = token;
+			i++;
+			token = strtok(NULL, " \t\n");
+		}
+		av[i] = NULL;
+		return av;
+
+
+
 /* check if pathname(token) exist */
-		if (stat(token, &statbuff) == 0)
+		if (stat(av[0], &statbuff) == 0)
 		{
 /* set first argument to be path */
 			av[0] = token;
@@ -58,7 +81,7 @@ void _prompt(char *argv[])
 				wait(NULL);
 			}
 		}
-		else 
-			perror(argv[0]);
+		else
+		       perror(av[0]);
 	}
 }
