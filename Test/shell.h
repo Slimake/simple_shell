@@ -3,10 +3,6 @@
 
 extern char **environ;
 
-#define CMDARGS_MAX 100
-
-
-
 /*include Files*/
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +15,6 @@ extern char **environ;
 
 
 /*Prototypes*/
-int newLine(char c);
 void _prompt(char *argv[]);
 
 
