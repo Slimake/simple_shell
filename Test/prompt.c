@@ -34,9 +34,6 @@ void _prompt(char *argv[])
 			exit(1);
 		}
 
-
-
-
 /* Tokenize lineptr using spaces, tabs and newline */
 		token = strtok(lineptr, " \t\n");
 		
