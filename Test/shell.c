@@ -5,6 +5,9 @@
 int main(int ac, char *av[])
 {
 	_prompt(av);
+	
+	
+	newLine('\n');
 
 	return 0;
 }
