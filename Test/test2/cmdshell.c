@@ -1,5 +1,3 @@
-#define _GNU_SOURCE // This allows us to use getline function
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,7 +12,7 @@
 #define MAX_COMMAND_LENGTH 1024
 #define MAX_ARGUMENTS 64
 
-// Function to read a line of input from the user
+/* Function to read a line of input from the user */
 char* read_input() {
     char* line = NULL;
     size_t bufsize = 0;
@@ -22,7 +20,8 @@ char* read_input() {
     return line;
 }
 
-// Function to parse the input into separate arguments
+/* Function to parse the input into separate arguments */
+	char* token;	
 	char** parse_input(char* line) {
 	char** arguments = (char**)malloc(MAX_ARGUMENTS * sizeof(char*));
 	
@@ -32,9 +31,9 @@ char* read_input() {
         exit(EXIT_FAILURE);
 	}
 
-    char* token;
+    
     int index = 0;
-    token = strtok(line, " \t\n"); // Tokenize the line using spaces, tabs, and newlines
+    token = strtok(line, " \t\n"); /* Tokenize the line using spaces, tabs, and newlines */
     while (token != NULL) {
         arguments[index] = token;
         index++;
@@ -61,10 +60,8 @@ void execute_command(char** arguments) {
         perror("Error forking");
     } else {
         // Parent process
-        do {
-            wpid = waitpid(pid, &status, WUNTRACED);
-        } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-    }
+    	wait(&status);
+	}
 }
 
 int main() {

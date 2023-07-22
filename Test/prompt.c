@@ -4,49 +4,71 @@
 void _prompt(char *argv[])
 {
 	pid_t pid;
-	size_t n = 0;
-	char *lineptr = NULL;
-	ssize_t cmd;
-	char *prompt = "$ ";
 	char *token;
-	char *av[] = {NULL, NULL};
+	char *pathname;
 	struct stat statbuff;
+	int i;
+	int argc = 0;
+	size_t n = 0;
+	char *command = NULL;
+	char *prompt = "$ ";
+	char *av[] = {NULL, NULL};
 	char *env[] = {NULL};
 
 	while (1) 
 	{	
 		write(STDOUT_FILENO, prompt, 2);
-		cmd = getline(&lineptr, &n, stdin);
-		if (cmd == -1)
+		if (getline(&command, &n, stdin) == -1)
 		{
 			perror("Error");
 			exit(0);
 		}
 	
-	
-		token = strtok(lineptr, " \t\r\a\n");
-		
-	//	if ( == 2)
-		
-/* check if pathname(token) exist */
-		if (stat(token, &statbuff) == 0)
+		pathname = strtok(command, " \t\r\a\n");
+
+		token = malloc(sizeof(char *));
+
+		i = 0;
+		while (pathname[i] != '\0')
 		{
-/* set first argument to be path */
-			av[0] = token;
+			token[i] = pathname[i];
+			i++;
+		}
+
+		i = 0;
+		while (token != NULL)
+		{
+			argc++;
+			 argv[i] = strtok(NULL, " \t\r\a\n");
+		}
+		argv[i] = NULL;
+
+
+		/*while (token != NULL)
+		{
+			argc++;
+			token = strtok(NULL, " \t\r\a\n");
+		}*/
+
+		/* check if pathname(token) exist */
+		if (stat(pathname, &statbuff) == 0)
+		{
+			/* set first argument to be path */
+			av[0] = pathname;
 
 			pid = fork();
 		
 			if (pid == -1)
 			{
-/*check fork error*/
+				/*check fork error*/
 				perror("Fork Failed");
 				exit(1);
 			}
 
-/*check if its a child/parent process.*/
+			/*check if its a child/parent process.*/
 			if (pid == 0)
 			{
-/*check execve return, if 0 (success), -1 (failed) */
+				/*check execve return, if 0 (success), -1 (failed) */
 				if(execve(av[0], av, env) == -1)
 				{
 					perror(av[0]);
