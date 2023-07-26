@@ -2,9 +2,9 @@
 
 /**
  * main - run the code
- * @argc - the number of arguments passed to main
- * @argv - the list of arguments passed
- * @env - the environment variables passed to main
+ * @argc: the number of arguments passed to main
+ * @argv: the list of arguments passed
+ * @env: the environment variables passed to main
  *
  * Return: 0 if success, -1 if fail
  */

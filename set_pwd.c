@@ -9,6 +9,7 @@
 void set_pwd(char *wd)
 {
 	char curr_dir[MAX_PATH_LENGTH];
+
 	if (getcwd(curr_dir, sizeof(curr_dir)) == NULL)
 	{
 		perror("Error");

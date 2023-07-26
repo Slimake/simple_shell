@@ -22,12 +22,15 @@
 void prompt(char **env);
 char *get_line();
 char **command_parser(char *lineptr);
+void _cd(char **commands, char *lineptr, char *former_dir);
 int _strlen(char *str);
 int _strcmp(const char *s1, const char *s2);
 void _execve(char **commands, char **env);
 int _atoi(const char *str);
 void set_pwd(char *wd);
 char **_strtok(char **str);
+int path_found(char *first_arg, char **commands, char **env);
+void path_not_found();
 
 #endif /* SHELL_H */
 

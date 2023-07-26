@@ -10,6 +10,7 @@ char *get_line()
 {
 	char *lineptr = NULL;
 	size_t n = 0;
+
 	if (getline(&lineptr, &n, stdin) == EOF) /* handles ctr+d */
 	{
 		free(lineptr);
