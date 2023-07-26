@@ -1,5 +1,25 @@
 #include "shell.h"
 
+/**
+ * prompt - Displays the shell prompt and handles user commands.
+ *
+ * @env: Array of strings containing the environment variables.
+ *       Note: This function assumes NULL-terminated array of strings.
+ *
+ * Description:
+ * This function is the main entry point for the shell. It creates an
+ * interactive command-line interface, displaying the prompt symbol "$ ".
+ * The function reads user commands, parses them, and executes the respective
+ * built-in commands like "exit" and "cd". For other commands, it calls the
+ * `_execve` function to execute external commands.
+ *
+ * Parameters:
+ *   @env: The environment variables required for external command execution.
+ *
+ * Return: This function does not return normally, it terminates the program
+ *         when the "exit" command is executed, or an error occurs.
+ */
+
 void prompt(char **env)
 {
 	char *lineptr;
