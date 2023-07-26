@@ -30,7 +30,7 @@ int _atoi(const char *str);
 void set_pwd(char *wd);
 char **_strtok(char **str);
 int path_found(char *first_arg, char **commands, char **env);
-void path_not_found();
+void path_not_found(char *first_arg, char **commands, char **env);
 
 #endif /* SHELL_H */
 
